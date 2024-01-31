@@ -1,3 +1,4 @@
+`use strict`
 const localStorageKey = 'feedback-form-state';
 const formRef = document.querySelector('.feedback-form');
 const textareaRef = formRef.querySelector('textarea');
