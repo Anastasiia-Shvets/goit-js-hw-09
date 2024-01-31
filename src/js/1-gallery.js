@@ -64,9 +64,10 @@ const images = [
     },
 ];
 
-const galleryRef = document.querySelector(".gallery");
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-function galleryRefTemplates() {
+const galleryRef = document.querySelector(".gallery");
     const galleryHTML = images
     .map(({ preview, original, description }) => {
         return `<li class="gallery-item">
@@ -78,9 +79,13 @@ function galleryRefTemplates() {
         alt="${description}"
     />
     </a>
-</li>`;
+    </li>`;
     })
     .join("");
-    galleryRef.innerHTML = galleryHTML;
-}
-galleryRefTemplates();
+    
+galleryRef.insertAdjacentHTML('beforeend', galleryHTML);
+
+const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+});
