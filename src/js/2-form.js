@@ -24,6 +24,10 @@ function onFormSubmit(event) {
     const message = formRef.elements.message.value;
 
     if (email && message) {
+
+        console.log('Email:', email);
+        console.log('Message:', message);
+        
         localStorage.removeItem(localStorageKey);
         formRef.reset();
         init();
