@@ -1,9 +1,9 @@
 `use strict`
 const localStorageKey = 'feedback-form-state';
 const formRef = document.querySelector('.feedback-form');
-const textareaRef = formRef.querySelector('textarea');
 
 formRef.addEventListener('input', onFormInput);
+formRef.addEventListener('submit', onFormSubmit);
 
 function onFormInput() {
     const email = formRef.elements.email.value;
@@ -14,7 +14,22 @@ function onFormInput() {
         message,
     };
 
-    saveToLS('localStorageKey', obj);
+    saveToLS(localStorageKey, obj);
+}
+
+function onFormSubmit(event) {
+    event.preventDefault();
+
+    const email = formRef.elements.email.value;
+    const message = formRef.elements.message.value;
+
+    if (email && message) {
+        localStorage.removeItem(localStorageKey);
+        formRef.reset();
+        init();
+    } else {
+        alert('Please fill in both fields of the form.');
+    }
 }
 
 function saveToLS(key, value) {
@@ -26,13 +41,19 @@ function saveToLS(key, value) {
 function loadFromLS(key) {
     const data = localStorage.getItem(key);
     try {
-        JSON.parse(data);
+        return JSON.parse(data);
     } catch {
-        return data;
+        return null;
     }
 }
 
-function init() {
-    const obj = loadFromLS('localStorageKey');
+    function init() {
+    const savedData = loadFromLS(localStorageKey);
+
+    if (savedData) {
+        formRef.elements.email.value = savedData.email || '';
+        formRef.elements.message.value = savedData.message || '';
+        }
 }
+
 init();
