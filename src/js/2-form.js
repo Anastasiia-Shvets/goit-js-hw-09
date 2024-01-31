@@ -22,12 +22,15 @@ function onFormSubmit(event) {
 
     const email = formRef.elements.email.value;
     const message = formRef.elements.message.value;
+    const objSubmit = {
+        email,
+        message,
+    };
 
     if (email && message) {
 
-        console.log('Email:', email);
-        console.log('Message:', message);
-        
+        console.log(objSubmit);
+
         localStorage.removeItem(localStorageKey);
         formRef.reset();
         init();
