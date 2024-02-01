@@ -6,8 +6,8 @@ formRef.addEventListener('input', onFormInput);
 formRef.addEventListener('submit', onFormSubmit);
 
 function onFormInput() {
-    const email = formRef.elements.email.value;
-    const message = formRef.elements.message.value;
+    const email = formRef.elements.email.value.trim();
+    const message = formRef.elements.message.value.trim();
     
     const obj = {
         email,
@@ -20,8 +20,8 @@ function onFormInput() {
 function onFormSubmit(event) {
     event.preventDefault();
 
-    const email = formRef.elements.email.value;
-    const message = formRef.elements.message.value;
+    const email = formRef.elements.email.value.trim();
+    const message = formRef.elements.message.value.trim();
     const objSubmit = {
         email,
         message,
